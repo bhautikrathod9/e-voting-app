@@ -7,28 +7,30 @@ const VoteConfirmationPage = ({ transactionHash, onReturnToDashboard, onViewHist
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
-    backgroundColor: '#f0f0f0',
-    padding: '20px',
-    fontFamily: 'Arial, sans-serif',
+    backgroundColor: '#121212', // Dark background for the body
+    position: 'relative', // Position relative for absolute positioning of the glow
+    overflow: 'hidden', // Prevent overflow
   };
 
   const cardStyle = {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#1e1e1e', // Dark card background
     borderRadius: '10px',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0 0 100px rgba(0, 123, 255, 0.5)', // Glowing effect around the card
     padding: '30px',
     textAlign: 'center',
     maxWidth: '400px',
     width: '100%',
+    color: '#fff', // White text for dark theme
+    zIndex: 1, // Ensure card is above the glow
   };
 
   const headingStyle = {
-    color: '#2c3e50',
+    color: '#ffffff',
     marginBottom: '20px',
   };
 
   const messageStyle = {
-    color: '#34495e',
+    color: '#dcdcdc', // Light gray for message
     marginBottom: '15px',
   };
 
@@ -46,13 +48,14 @@ const VoteConfirmationPage = ({ transactionHash, onReturnToDashboard, onViewHist
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
-    transition: 'background-color 0.3s',
+    transition: 'background-color 0.3s, box-shadow 0.3s', // Added transition for box-shadow
     margin: '10px 0', // Add some margin for spacing
     width: '100%', // Make buttons full width
   };
 
   const buttonHoverStyle = {
     backgroundColor: '#0056b3',
+    boxShadow: '0 0 10px rgba(0, 123, 255, 0.8)', // Glowing effect
   };
 
   return (
@@ -64,16 +67,28 @@ const VoteConfirmationPage = ({ transactionHash, onReturnToDashboard, onViewHist
         <button 
           style={buttonStyle} 
           onClick={onReturnToDashboard}
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
-          onMouseOut={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
+          onMouseOver={(e) => {
+            e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor;
+            e.currentTarget.style.boxShadow = buttonHoverStyle.boxShadow; // Add glow on hover
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor;
+            e.currentTarget.style.boxShadow = 'none'; // Remove glow
+          }}
         >
           Return to Dashboard
         </button>
         <button 
           style={buttonStyle} 
           onClick={onViewHistory}
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
-          onMouseOut={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
+          onMouseOver={(e) => {
+            e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor;
+            e.currentTarget.style.boxShadow = buttonHoverStyle.boxShadow; // Add glow on hover
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor;
+            e.currentTarget.style.boxShadow = 'none'; // Remove glow
+          }}
         >
           View Voter History
         </button>

@@ -40,7 +40,7 @@ const ElectionSelectionPage = ({ onVoteNow }) => {
     width: "100%", // Make it responsive
     backgroundColor: "#1e1e1e", // Dark card background
     borderRadius: "10px",
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+    boxShadow: "0 0px 100px rgba(43, 144, 252, 0.64)", // Glowing effect around the card
   };
 
   const electionStyle = {

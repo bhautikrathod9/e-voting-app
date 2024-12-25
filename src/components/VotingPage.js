@@ -33,7 +33,7 @@ const VotingPage = ({ electionId, onSubmitVote }) => {
     padding: '20px',
     backgroundColor: '#1e1e1e', // Dark card background
     borderRadius: '10px',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+    boxShadow: '0 0px 100px rgba(29, 108, 234, 0.59)',
     maxWidth: '600px',
     width: '100%',
     color: '#fff', // White text for dark theme
@@ -70,7 +70,7 @@ const VotingPage = ({ electionId, onSubmitVote }) => {
     fontSize: '14px',
     cursor: 'pointer',
     backgroundColor: isSelected ? '#007bff' : '#007bff',
-    color: isSelected ? '#ffffff' : '#007bff',
+    color: isSelected ? '#ffffff' : '#ffffff',
     border: '2px solid #007bff',
     borderRadius: '5px',
     transition: 'background-color 0.3s, transform 0.2s',
