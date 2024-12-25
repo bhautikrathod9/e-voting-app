@@ -1,65 +1,63 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Import Routes
 import ElectionSelectionPage from "./components/ElectionSelectionPage";
 import VotingPage from "./components/VotingPage";
 import VoteConfirmationPage from "./components/VoteConfirmationPage";
 import VoterHistoryPage from "./components/VoterHistoryPage";
-
-// Constants for page names
-const PAGE_SELECTION = "selection";
-const PAGE_VOTING = "voting";
-const PAGE_CONFIRMATION = "confirmation";
-const PAGE_HISTORY = "history";
+import SignUp from "./components/signUp"; // Import the SignUp component
+import Login from "./components/login"; // Import the Login component
 
 function App() {
-  const [currentPage, setCurrentPage] = useState(PAGE_SELECTION);
   const [currentElection, setCurrentElection] = useState(null);
   const [transactionHash, setTransactionHash] = useState(null);
 
   const handleVoteNow = (electionId) => {
-    setCurrentElection(electionId);
-    setCurrentPage(PAGE_VOTING);
+    setCurrentElection(electionId); // Set the current election
   };
 
   const handleSubmitVote = (candidateId) => {
-    // Simulate a transaction hash for the vote submission
     const mockTransactionHash = `0x${Math.random().toString(16).slice(2, 10)}`;
     setTransactionHash(mockTransactionHash);
-    setCurrentPage(PAGE_CONFIRMATION);
   };
 
   const handleReturnToDashboard = () => {
-    setCurrentPage(PAGE_SELECTION); // Navigate back to the selection page
-    setCurrentElection(null); // Reset the current election
-    setTransactionHash(null); // Reset the transaction hash
+    setCurrentElection(null);
+    setTransactionHash(null);
   };
 
-  const handleViewHistory = () => {
-    setCurrentPage(PAGE_HISTORY);
+  const handleSignUpComplete = () => {
+    // Logic after sign-up can be added here
   };
 
   return (
-    <div
-      style={{
-        fontFamily: "Arial, sans-serif",
-        backgroundColor: "#121212", // Updated to dark background
-        minHeight: "100vh",
-        margin: "0", // Ensure no margins
-        padding: "0", // Remove padding to avoid visual border
-        boxSizing: "border-box", // Ensure consistent sizing
-        color: "#fff", // Ensure consistent text color for dark theme
-      }}
-    >
-      {currentPage === PAGE_SELECTION && <ElectionSelectionPage onVoteNow={handleVoteNow} />}
-      {currentPage === PAGE_VOTING && <VotingPage electionId={currentElection} onSubmitVote={handleSubmitVote} />}
-      {currentPage === PAGE_CONFIRMATION && (
-        <VoteConfirmationPage
-          transactionHash={transactionHash || "N/A"} // Handle case where transactionHash is null
-          onReturnToDashboard={handleReturnToDashboard}
-          onViewHistory={handleViewHistory}
-        />
-      )}
-      {currentPage === PAGE_HISTORY && <VoterHistoryPage onReturnToDashboard={handleReturnToDashboard} />}
-    </div>
+    <Router>
+      <div
+        style={{
+          fontFamily: "Arial, sans-serif",
+          backgroundColor: "#121212",
+          minHeight: "100vh",
+          margin: "0",
+          padding: "0",
+          boxSizing: "border-box",
+          color: "#fff",
+        }}
+      >
+        <Routes>
+          <Route path="/signup" element={<SignUp onSignUpComplete={handleSignUpComplete} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/election-selection" element={<ElectionSelectionPage onVoteNow={handleVoteNow} />} />
+          <Route path="/voting" element={<VotingPage electionId={currentElection} onSubmitVote={handleSubmitVote} />} />
+          <Route path="/confirmation" element={
+            <VoteConfirmationPage
+              transactionHash={transactionHash || "N/A"}
+              onReturnToDashboard={handleReturnToDashboard}
+            />
+          } />
+          <Route path="/history" element={<VoterHistoryPage onReturnToDashboard={handleReturnToDashboard} />} />
+          <Route path="/" element={<ElectionSelectionPage onVoteNow={handleVoteNow} />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
