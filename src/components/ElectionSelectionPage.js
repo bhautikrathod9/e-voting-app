@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Navbar from "./Sidebar"; // Import Navbar component
 
 const ElectionSelectionPage = ({ onVoteNow }) => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const elections = [
     { 
       id: 1, 
@@ -71,6 +74,11 @@ const ElectionSelectionPage = ({ onVoteNow }) => {
     cursor: "not-allowed",
   };
 
+  const handleVote = (electionId) => {
+    onVoteNow(electionId); // Call the parent function to set the current election
+    navigate("/voting"); // Navigate to the VotingPage
+  };
+
   return (
     <div style={{ backgroundColor: "#121212", color: "#fff", minHeight: "100vh", margin: "0", padding: "0", overflow: "hidden" }}> {/* Main div with dark theme */}
       <Navbar /> {/* Navbar added here */}
@@ -101,7 +109,7 @@ const ElectionSelectionPage = ({ onVoteNow }) => {
               {election.ongoing ? (
                 <button 
                   style={buttonStyle} 
-                  onClick={() => onVoteNow(election.id)}
+                  onClick={() => handleVote(election.id)} // Use handleVote to navigate
                   onMouseOver={(e) => {
                     e.currentTarget.style.backgroundColor = "#0056b3";
                     e.currentTarget.style.boxShadow = "0 0 20px rgba(0, 123, 255, 0.8)"; // Glowing effect on hover

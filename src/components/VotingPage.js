@@ -1,7 +1,18 @@
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-const VotingPage = ({ electionId, onSubmitVote }) => {
+const VotingPage = ({ electionId }) => {
+  const navigate = useNavigate(); // Hook to programmatically navigate
   const [selectedCandidate, setSelectedCandidate] = useState(null);
+
+  const handleVoteSubmit = (candidateId) => {
+    // Perform any backend interaction here (e.g., save vote to blockchain)
+    console.log(`Voted for candidate ID: ${candidateId}`);
+
+    // Navigate to the next page after successful vote submission
+    navigate("/confirmation");
+  };
+
 
   // Example candidates
   const candidates = [
@@ -124,15 +135,19 @@ const VotingPage = ({ electionId, onSubmitVote }) => {
         ))}
 
         <div style={{ textAlign: 'center' }}>
-          <button 
-            disabled={!selectedCandidate} 
-            onClick={() => onSubmitVote(selectedCandidate)} 
-            style={buttonStyle}
-            onMouseOver={(e) => { if (selectedCandidate) e.currentTarget.style.backgroundColor = '#0056b3'; }}
-            onMouseOut={(e) => { if (selectedCandidate) e.currentTarget.style.backgroundColor = '#007bff'; }}
+        <button
+          disabled={!selectedCandidate}
+          onClick={() => handleVoteSubmit(selectedCandidate)}
+          style={buttonStyle}
+          onMouseOver={(e) => {
+            if (selectedCandidate) e.currentTarget.style.backgroundColor = '#0056b3';
+          }}
+          onMouseOut={(e) => {
+            if (selectedCandidate) e.currentTarget.style.backgroundColor = '#007bff';
+          }}
           >
             Submit Vote
-          </button>
+        </button>
         </div>
       </div>
     </div>
