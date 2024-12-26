@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const VotingPage = ({ electionId, onSubmitVote }) => {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
 
+  // Example candidates
   const candidates = [
     { 
       id: 1, 
@@ -20,23 +21,24 @@ const VotingPage = ({ electionId, onSubmitVote }) => {
     },
   ];
 
+  // Styles
   const containerStyle = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
-    backgroundColor: '#121212', // Dark background for the body
+    backgroundColor: '#121212',
   };
 
   const cardStyle = {
     fontFamily: 'Arial, sans-serif',
     padding: '20px',
-    backgroundColor: '#1e1e1e', // Dark card background
+    backgroundColor: '#1e1e1e',
     borderRadius: '10px',
     boxShadow: '0 0px 100px rgba(29, 108, 234, 0.59)',
     maxWidth: '600px',
     width: '100%',
-    color: '#fff', // White text for dark theme
+    color: '#fff',
   };
 
   const candidateStyle = {
@@ -44,15 +46,15 @@ const VotingPage = ({ electionId, onSubmitVote }) => {
     alignItems: 'center',
     marginBottom: '20px',
     padding: '15px',
-    border: '1px solid #333', // Darker border for candidate items
+    border: '1px solid #333',
     borderRadius: '8px',
-    backgroundColor: '#2a2a2a', // Darker background for candidate items
+    backgroundColor: '#2a2a2a',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
     transition: 'transform 0.2s, box-shadow 0.2s',
   };
 
   const imgStyle = {
-    width: "80px", // Increased image size
+    width: "80px",
     height: "80px",
     borderRadius: '50%',
     marginRight: '15px',
@@ -61,7 +63,7 @@ const VotingPage = ({ electionId, onSubmitVote }) => {
 
   const nameStyle = {
     margin: '10px 0',
-    color: '#fff', // White text for candidate name
+    color: '#fff',
     fontWeight: 'bold',
   };
 
@@ -70,11 +72,11 @@ const VotingPage = ({ electionId, onSubmitVote }) => {
     fontSize: '14px',
     cursor: 'pointer',
     backgroundColor: isSelected ? '#007bff' : '#007bff',
-    color: isSelected ? '#ffffff' : '#ffffff',
+    color: '#ffffff',
     border: '2px solid #007bff',
     borderRadius: '5px',
     transition: 'background-color 0.3s, transform 0.2s',
-    marginLeft: 'auto', // Align to the right
+    marginLeft: 'auto',
   });
 
   const buttonStyle = {
