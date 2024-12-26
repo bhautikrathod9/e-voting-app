@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Import Routes
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom"; // Import Navigate
 import ElectionSelectionPage from "./components/ElectionSelectionPage";
 import VotingPage from "./components/VotingPage";
 import VoteConfirmationPage from "./components/VoteConfirmationPage";
@@ -54,7 +54,7 @@ function App() {
             />
           } />
           <Route path="/history" element={<VoterHistoryPage onReturnToDashboard={handleReturnToDashboard} />} />
-          <Route path="/" element={<ElectionSelectionPage onVoteNow={handleVoteNow} />} />
+          <Route path="/" element={<Navigate to="/signup" />} /> {/* Redirect to sign-up */}
         </Routes>
       </div>
     </Router>
