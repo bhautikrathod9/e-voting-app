@@ -19,7 +19,7 @@ const ElectionSelectionPage = ({ onVoteNow }) => {
       name: "City Council Election", 
       description: "Vote for your city council representative.", 
       endTime: "2024-12-25", 
-      ongoing: false,
+      ongoing: true,
       image: "https://static.vecteezy.com/system/resources/thumbnails/038/516/357/small_2x/ai-generated-eagle-logo-design-in-black-style-on-transparant-background-png.png" // Image URL
     },
   ];

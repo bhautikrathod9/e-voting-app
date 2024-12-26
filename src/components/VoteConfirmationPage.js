@@ -88,7 +88,7 @@ const VoteConfirmationPage = ({ transactionHash }) => {
             e.currentTarget.style.boxShadow = 'none'; // Remove glow
           }}
         >
-          Return to Election Selection
+          Return to Dashboard
         </button>
 
         <button 

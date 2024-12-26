@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const VoteHistoryPage = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
   const [searchTerm, setSearchTerm] = useState('');
   const [electionType, setElectionType] = useState('');
   const [candidate, setCandidate] = useState('');
+  const [isHovered, setIsHovered] = useState(false); // State for hover effect
 
   // Sample vote records (replace with actual data)
   const voteRecords = [
@@ -37,6 +40,10 @@ const VoteHistoryPage = () => {
       (candidate ? record.candidate.includes(candidate) : true)
     );
   });
+
+  const handleNavigateToElectionSelection = () => {
+    navigate("/election-selection"); // Navigate to Election Selection page
+  };
 
   return (
     <div style={styles.container}>
@@ -98,8 +105,19 @@ const VoteHistoryPage = () => {
                 </a>
               </td>
               <td>{record.status}</td>
-              <td>
-                <button onClick={() => window.open(`https://blockchainexplorer.com/tx/${record.transactionHash}`, '_blank')} style={styles.verifyButton}>
+              <td style={{ textAlign: 'center' }}> {/* Center the Verify button */}
+                <button 
+                  onClick={() => window.open(`https://blockchainexplorer.com/tx/${record.transactionHash}`, '_blank')} 
+                  style={styles.verifyButton} 
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.backgroundColor = "#0056b3";
+                    e.currentTarget.style.boxShadow = "0 0 20px rgba(0, 123, 255, 0.8)"; // Glowing effect on hover
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.backgroundColor = "#007bff";
+                    e.currentTarget.style.boxShadow = "none"; // Remove glow
+                  }}
+                >
                   Verify
                 </button>
               </td>
@@ -107,6 +125,20 @@ const VoteHistoryPage = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Button to navigate back to Election Selection */}
+      <button 
+        style={{
+          ...styles.navigateButton,
+          boxShadow: isHovered ? "0px 0px 30px #28a745" : "0px 0px 20px #28a745",
+          backgroundColor: isHovered ? "#218838" : "#28a745"
+        }} 
+        onMouseEnter={() => setIsHovered(true)} 
+        onMouseLeave={() => setIsHovered(false)} 
+        onClick={handleNavigateToElectionSelection}
+      >
+        Back to Home Page
+      </button>
     </div>
   );
 };
@@ -145,10 +177,6 @@ const styles = {
     flexDirection: 'column',
     marginBottom: '20px',
   },
-  filtersHover: {
-    backgroundColor: "#0056b3", // Darker blue on hover
-    boxShadow: "0 0 15px rgba(0, 123, 255, 1)", // Glowing effect on hover
-  },
   searchBar: {
     padding: '10px',
     marginBottom: '10px',
@@ -182,6 +210,16 @@ const styles = {
   link: {
     color: '#007bff',
     textDecoration: 'none',
+  },
+  navigateButton: {
+    padding: '10px 15px',
+    backgroundColor: '#28a745',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '9px',
+    cursor: 'pointer',
+    marginTop: '20px',
+    transition: 'background-color 0.3s',
   },
 };
 
