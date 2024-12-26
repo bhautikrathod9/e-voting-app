@@ -1,6 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
-const VoteConfirmationPage = ({ transactionHash, onReturnToDashboard, onViewHistory }) => {
+const VoteConfirmationPage = ({ transactionHash }) => {
+  const navigate = useNavigate(); // Hook to programmatically navigate
+
+  const handleReturnToElectionSelection = () => {
+    navigate("/election-selection"); // Navigate to Election Selection page
+  };
+
+  const handleViewHistory = () => {
+    navigate("/history"); // Navigate to Voter History page
+  };
+
   const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -64,9 +75,10 @@ const VoteConfirmationPage = ({ transactionHash, onReturnToDashboard, onViewHist
         <h2 style={headingStyle}>Vote Confirmation</h2>
         <p style={messageStyle}>Your vote has been successfully submitted!</p>
         <p style={transactionHashStyle}>Transaction Hash: {transactionHash}</p>
+        
         <button 
           style={buttonStyle} 
-          onClick={onReturnToDashboard}
+          onClick={handleReturnToElectionSelection}
           onMouseOver={(e) => {
             e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor;
             e.currentTarget.style.boxShadow = buttonHoverStyle.boxShadow; // Add glow on hover
@@ -76,11 +88,12 @@ const VoteConfirmationPage = ({ transactionHash, onReturnToDashboard, onViewHist
             e.currentTarget.style.boxShadow = 'none'; // Remove glow
           }}
         >
-          Return to Dashboard
+          Return to Election Selection
         </button>
+
         <button 
           style={buttonStyle} 
-          onClick={onViewHistory}
+          onClick={handleViewHistory}
           onMouseOver={(e) => {
             e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor;
             e.currentTarget.style.boxShadow = buttonHoverStyle.boxShadow; // Add glow on hover
